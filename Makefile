@@ -157,7 +157,7 @@ ifneq ($(KBUILD_OUTPUT),)
 # check that the output directory actually exists
 saved-output := $(KBUILD_OUTPUT)
 KBUILD_OUTPUT := $(shell mkdir -p $(KBUILD_OUTPUT) && cd $(KBUILD_OUTPUT) \
-								&& /bin/pwd)
+								&& pwd)
 $(if $(KBUILD_OUTPUT),, \
      $(error failed to create output directory "$(saved-output)"))
 
@@ -1925,7 +1925,7 @@ ifneq ($(KBUILD_SRC),)
 	$(Q)if [ -f $(srctree)/.config -o -d $(srctree)/include/config ]; then \
 		echo >&2 "  $(srctree) is not clean, please run 'make mrproper'"; \
 		echo >&2 "  in the '$(srctree)' directory.";\
-		/bin/false; \
+		false; \
 	fi;
 endif
 
@@ -1936,7 +1936,7 @@ prepare1: prepare2 $(version_h) $(timestamp_h) $(dt_h) $(env_h) \
                    include/config/auto.conf
 ifeq ($(wildcard $(LDSCRIPT)),)
 	@echo >&2 "  Could not find linker script."
-	@/bin/false
+	@false
 endif
 
 ifeq ($(CONFIG_USE_DEFAULT_ENV_FILE),y)
